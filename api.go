@@ -65,7 +65,7 @@ func SetAll(m Map) {
 func Get(key interface{}) (interface{}, bool) {
 	id := GoId()
 	lock.RLock()
-	m, ok := table[id]
+	m := table[id]
 	lock.RUnlock()
 	val, ok := m[key]
 	return val, ok
@@ -81,9 +81,9 @@ func Set(key, val interface{}) {
 // slightly faster than the equivalent delete(GetAll(), key)
 func Del(key interface{}) {
 	id := GoId()
-	lock.Lock()
+	lock.RLock()
 	m, ok := table[id]
-	lock.Unlock()
+	lock.RUnlock()
 	if ok {
 		delete(m, key)
 	}
