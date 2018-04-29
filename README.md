@@ -13,8 +13,8 @@ and [context.Context](https://blog.golang.org/context), which is how you're enco
 to solve problems that would require a goroutine-local storage.
 
 The main obstacle in adopting `context.Context` is that *all* of your functions
-must have a new first argument, so feel free to ignore this warning and read on
-if that horrifies you or is simply not feasible for your use case.
+must have a new first argument. So, if that horrifies you or is simply not feasible
+for your use case, feel free to ignore this warning and read on.
 
 Just remember that, if some Go programmers frowns at your use of goroutine-local
 storage, there are good reasons.
