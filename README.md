@@ -28,6 +28,14 @@ Other goroutine-local libraries, as [jtolds/gls](https://github.com/jtolds/gls)
 and [tylerb/gls](https://github.com/tylerb/gls) explain the reasons
 and use cases for goroutine-local storage more in detail.
 
+### Status ###
+
+Beta.
+
+Lightly tested on amd64, 386, arm64 with Go 1.10.1.  
+32-bit arm supported in theory but not tested.  
+Other architectures (mips, ppc64, s390x ...) currently not supported.
+
 ### How it works ###
 
 Go runtime has an internal, i.e. unexported, goroutine-local `runtime.g` struct.
