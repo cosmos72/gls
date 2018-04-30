@@ -6,7 +6,7 @@
 
 // gls/runtime is deceivingly simple...
 // but requires a lot of trickery to compile and install.
-// prefer assembler implementations goid_*.s
+// prefer assembler implementations id_*.s
 
 package gls
 

@@ -5,14 +5,14 @@
 /*
   to use compile this file, run the command:
 
-	go tool compile -o runtime.a -pack -std -+ goid.go
+	go tool compile -o runtime.a -pack -std -+ id.go
 
   which tell gc compiler that it's part of the package "runtime" in the standard library
   If you are not fleeing in panic and screaming already, you should.
 
   Then install it manually with the commands:
 
-    DEST="$(go env GOPATH)/pkg/$(go env GOOS)_$(go env GOARCH)/github.com/cosmos72/gls"
+	DEST="$(go env GOPATH)/pkg/$(go env GOOS)_$(go env GOARCH)/github.com/cosmos72/gls"
 	mkdir -p     "$DEST"
 	mv runtime.a "$DEST"
 */
