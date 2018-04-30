@@ -6,13 +6,6 @@ package gls
 
 import "sync"
 
-// return the current goroutine ID.
-//
-// note that the returned value is DIFFERENT from most other goroutine libraries:
-// this GoId() returns the address, converted to uintptr, of the runtime.g struct.
-// NOT the runtime.g.goid field returned by most other libraries.
-func GoId() uintptr
-
 // map of goroutine-local variables.
 type Map map[interface{}]interface{}
 
@@ -22,10 +15,10 @@ var (
 )
 
 // delete all goroutine-local variables.
-// if a goroutine used *any* function from this package, except GoId() and DelAll(),
-// it MUST invoke DelAll() before such goroutine exits, otherwise it will leak memory.
+// if a goroutine used any of the functions GetAll(), SetAll(), Set() from this package,
+// then it MUST invoke DelAll() before such goroutine exits, otherwise it will leak memory.
 func DelAll() {
-	id := GoId()
+	id := GoID()
 	lock.Lock()
 	delete(table, id)
 	lock.Unlock()
@@ -35,7 +28,7 @@ func DelAll() {
 // i.e. changes to it are visible in subsequent calls to GetAll() and Get()
 // from the same goroutine, until either DelAll() or SetAll() are invoked
 func GetAll() Map {
-	id := GoId()
+	id := GoID()
 	lock.Lock()
 	m := table[id]
 	if m == nil {
@@ -54,7 +47,7 @@ func SetAll(m Map) {
 	if m == nil {
 		m = make(Map)
 	}
-	id := GoId()
+	id := GoID()
 	lock.Lock()
 	table[id] = m
 	lock.Unlock()
@@ -63,7 +56,7 @@ func SetAll(m Map) {
 // get a single goroutine-local variable.
 // slightly faster than the equivalent GetAll()[key]
 func Get(key interface{}) (interface{}, bool) {
-	id := GoId()
+	id := GoID()
 	lock.RLock()
 	m := table[id]
 	lock.RUnlock()
@@ -80,7 +73,7 @@ func Set(key, val interface{}) {
 // delete a single goroutine-local variable.
 // slightly faster than the equivalent delete(GetAll(), key)
 func Del(key interface{}) {
-	id := GoId()
+	id := GoID()
 	lock.RLock()
 	m, ok := table[id]
 	lock.RUnlock()

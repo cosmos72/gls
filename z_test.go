@@ -10,49 +10,49 @@ import (
 
 var verbose bool = false
 
-func AsyncGoId() <-chan uintptr {
+func AsyncGoID() <-chan uintptr {
 	ch := make(chan uintptr)
 	go func() {
-		ch <- GoId()
+		ch <- GoID()
 	}()
 	return ch
 }
 
-func TestGoId(t *testing.T) {
-	id1 := GoId()
-	id2 := GoId()
+func TestGoID(t *testing.T) {
+	id1 := GoID()
+	id2 := GoID()
 	if id1 == id2 {
 		if verbose {
-			t.Logf("TestGoId: 0x%x == 0x%x", id1, id2)
+			t.Logf("TestGoID: 0x%x == 0x%x", id1, id2)
 		}
 	} else {
-		t.Errorf("TestGoId: 0x%x != 0x%x", id1, id2)
+		t.Errorf("TestGoID: 0x%x != 0x%x", id1, id2)
 	}
 }
 
-func TestAsyncGoId1(t *testing.T) {
-	id1 := GoId()
-	id2 := <-AsyncGoId()
+func TestAsyncGoID1(t *testing.T) {
+	id1 := GoID()
+	id2 := <-AsyncGoID()
 	if id1 != id2 {
 		if verbose {
-			t.Logf("TestAsyncGoId1: 0x%x != 0x%x", id1, id2)
+			t.Logf("TestAsyncGoID1: 0x%x != 0x%x", id1, id2)
 		}
 	} else {
-		t.Errorf("TestAsyncGoId1: 0x%x == 0x%x", id1, id2)
+		t.Errorf("TestAsyncGoID1: 0x%x == 0x%x", id1, id2)
 	}
 }
 
-func TestAsyncGoId2(t *testing.T) {
-	ch1 := AsyncGoId()
-	ch2 := AsyncGoId()
+func TestAsyncGoID2(t *testing.T) {
+	ch1 := AsyncGoID()
+	ch2 := AsyncGoID()
 	id1 := <-ch1
 	id2 := <-ch2
 	if id1 != id2 {
 		if verbose {
-			t.Logf("TestAsyncGoId2: 0x%x != 0x%x", id1, id2)
+			t.Logf("TestAsyncGoID2: 0x%x != 0x%x", id1, id2)
 		}
 	} else {
-		t.Errorf("TestAsyncGoId2: 0x%x == 0x%x", id1, id2)
+		t.Errorf("TestAsyncGoID2: 0x%x == 0x%x", id1, id2)
 	}
 }
 

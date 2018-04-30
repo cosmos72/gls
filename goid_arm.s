@@ -6,8 +6,6 @@
 #include "textflag.h" // for NOSPLIT
 #include "../../src/runtime/go_tls.h"
 
-TEXT ·GoId(SB),NOSPLIT,$0-4
-	get_tls(CX)
-	MOVL g(CX), AX
-	MOVL AX, 4(SP)
+TEXT ·GoID(SB),NOSPLIT,$0-4
+	MOVW g, goid+0(FP)
 	RET
