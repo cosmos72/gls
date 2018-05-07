@@ -10,7 +10,7 @@
   which tell gc compiler that it's part of the package "runtime" in the standard library
   If you are not fleeing in panic and screaming already, you should.
 
-  Then install it manually with the commands:
+  Then you should install it manually, but these commands are not enough (TODO: why?)
 
 	DEST="$(go env GOPATH)/pkg/$(go env GOOS)_$(go env GOARCH)/github.com/cosmos72/gls"
 	mkdir -p     "$DEST"
@@ -19,16 +19,12 @@
 
 package runtime
 
-import (
-	"unsafe"
-)
-
 // getg returns the pointer to the current g.
 // The compiler rewrites calls to this function into instructions
 // that fetch the g directly (from TLS or from the dedicated register).
-func getg() *struct{}
+func getg() uintptr
 
 //go:nosplit
 func GoID() uintptr {
-	return uintptr(unsafe.Pointer(getg()))
+	return getg()
 }

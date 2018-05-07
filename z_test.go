@@ -62,10 +62,10 @@ func TestMap1(t *testing.T) {
 	v, ok := Get(0)
 	if ok && v == '#' {
 		if verbose {
-			t.Logf("TestMap1: expecting (#, true) found (%v, %v)", ok, v)
+			t.Logf("TestMap1: expecting (%v, %v) and found (%v, %v)", '#', true, v, ok)
 		}
 	} else {
-		t.Errorf("TestMap1: expecting (#, true) found (%v, %v)", ok, v)
+		t.Errorf("TestMap1: expecting (%v, %v) but found (%v, %v)", '#', true, v, ok)
 	}
 }
 
@@ -77,10 +77,10 @@ func TestMap2(t *testing.T) {
 	v, ok := Get(1)
 	if ok && v == 2 {
 		if verbose {
-			t.Logf("TestMap2: expecting (2, true) found (%v, %v)", ok, v)
+			t.Logf("TestMap2: expecting (%v, %v) and found (%v, %v)", 2, true, v, ok)
 		}
 	} else {
-		t.Errorf("TestMap2: expecting (2, true) found (%v, %v)", ok, v)
+		t.Errorf("TestMap2: expecting (%v, %v) but found (%v, %v)", 2, true, v, ok)
 	}
 }
 
@@ -93,10 +93,10 @@ func TestMap3(t *testing.T) {
 	v, ok := Get("a")
 	if ok && v == "b" {
 		if verbose {
-			t.Logf("TestMap3: expecting (b, true) found (%v, %v)", ok, v)
+			t.Logf("TestMap3: expecting (%v, %v) and found (%v, %v)", "b", true, v, ok)
 		}
 	} else {
-		t.Errorf("TestMap3: expecting (b, true) found (%v, %v)", ok, v)
+		t.Errorf("TestMap3: expecting (%v, %v) but found (%v, %v)", "b", true, v, ok)
 	}
 }
 
